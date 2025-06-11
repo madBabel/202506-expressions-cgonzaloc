@@ -26,7 +26,7 @@ jobs:
           echo "Branch: ${{ github.ref }}" 
           echo "Commit SHA: ${{ github.sha }}" 
           echo "Runner OS: ${{ runner.os }}"
-      - if: ${{inputs.debug}} && ${{github.ref}} == 'main'
+      - if: ${{inputs.debug && github.ref == 'main'}}
         name: "[Debug] Triggered from Main"
         run: echo "Triggered from main branch!"
       - name: "Print Variables"
