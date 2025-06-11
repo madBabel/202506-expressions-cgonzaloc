@@ -26,7 +26,7 @@ jobs:
           echo "Branch: ${{ github.ref }}" 
           echo "Commit SHA: ${{ github.sha }}" 
           echo "Runner OS: ${{ runner.os }}"
-      - if: ${{inputs.debug}} && ${{github.ref == 'main'}}
+      - if: ${{inputs.debug}} && ${{github.ref}} == 'main'
         name: "[Debug] Triggered from Main"
         run: echo "Triggered from main branch!"
       - name: "Print Variables"
@@ -42,3 +42,13 @@ jobs:
           OVERWRITTEN: 'Overwritten at step level'
         run: |
           echo "Overwritten var: $OVERWRITTEN"
+  functions-pr-data:
+    runs-on: ubuntu-latest
+    steps:
+      - if: ${{ github.event_name }} == "pull_request"
+        name: "Print PR labels"
+        run: |
+          cat << EOF
+          ${{ toJSON(github.event.pull_request.labels) }}
+          EOF
+
