@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: ${{ github.event_name }} == "pull_request"
-        name: "Print PR labels"
+        name: "Print PR Info"
         run: |
           cat << EOF
           ${{ toJSON(github.event.pull_request.labels) }}
